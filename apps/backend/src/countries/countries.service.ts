@@ -1,0 +1,20 @@
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+
+@Injectable()
+export class CountriesService {
+  constructor(private prisma: PrismaService) {}
+
+  async findAll() {
+    return this.prisma.country.findMany({
+      orderBy: { name: 'asc' },
+    });
+  }
+
+  async findOne(id: string) {
+    return this.prisma.country.findUnique({
+      where: { id },
+    });
+  }
+}
+
