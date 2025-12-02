@@ -229,18 +229,28 @@ docker build -f apps/frontend/Dockerfile -t slooze-frontend .
 
 ## 🚢 Deployment
 
-### Backend (Fly.io / Render / Railway)
+### Quick Deploy Guide
 
-1. Set environment variables
-2. Run migrations: `pnpm prisma:migrate:deploy`
-3. Start server: `node dist/main`
+See [QUICK_DEPLOY.md](docs/QUICK_DEPLOY.md) for step-by-step instructions.
 
-### Frontend (Vercel)
+### Frontend → Vercel
 
-1. Connect GitHub repository
-2. Set root directory to `apps/frontend`
-3. Configure environment variables
-4. Deploy automatically on push to main
+1. **Connect Repository**: [Vercel Dashboard](https://vercel.com/new) → Import repository
+2. **Configure**: Root Directory: `apps/frontend` (auto-detected from `vercel.json`)
+3. **Environment Variables**:
+   - `NEXT_PUBLIC_API_URL=https://your-backend.onrender.com/api`
+   - `NEXT_PUBLIC_STRIPE_KEY=pk_test_...`
+4. **Deploy** → Frontend live!
+
+### Backend → Render
+
+1. **Create Database**: Render → "New +" → PostgreSQL → Name: `slooze-db`
+2. **Create Web Service**: Render → "New +" → Web Service → Connect repo
+3. **Configure**: Root Directory: `apps/backend` (see `render.yaml` for full config)
+4. **Environment Variables**: Set `DATABASE_URL`, `JWT_SECRET`, `STRIPE_SECRET_KEY`, etc.
+5. **Link Database** → Deploy → Seed database
+
+**Detailed instructions**: [DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ## 📚 Documentation
 
