@@ -50,14 +50,14 @@ export class OrdersController {
   @CheckAbility(Action.Update, Subject.Order)
   @ApiOperation({ summary: 'Checkout order (ADMIN/MANAGER only)' })
   async checkout(@Param('id') id: string, @CurrentUser() user: any) {
-    return this.ordersService.checkout(id, user.id, user.role);
+    return this.ordersService.checkout(id, user.id, user.role, user.countryId);
   }
 
   @Post(':id/cancel')
   @CheckAbility(Action.Delete, Subject.Order)
   @ApiOperation({ summary: 'Cancel order (ADMIN/MANAGER only)' })
   async cancel(@Param('id') id: string, @CurrentUser() user: any) {
-    return this.ordersService.cancel(id, user.id, user.role);
+    return this.ordersService.cancel(id, user.id, user.role, user.countryId);
   }
 }
 

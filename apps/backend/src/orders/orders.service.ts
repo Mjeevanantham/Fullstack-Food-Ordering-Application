@@ -163,8 +163,8 @@ export class OrdersService {
     return order;
   }
 
-  async checkout(id: string, userId: string, userRole: Role) {
-    const order = await this.findOne(id, userId, userRole);
+  async checkout(id: string, userId: string, userRole: Role, userCountryId?: string) {
+    const order = await this.findOne(id, userId, userRole, userCountryId);
 
     if (order.status !== OrderStatus.PENDING) {
       throw new BadRequestException('Order cannot be checked out');
@@ -200,8 +200,8 @@ export class OrdersService {
     };
   }
 
-  async cancel(id: string, userId: string, userRole: Role) {
-    const order = await this.findOne(id, userId, userRole);
+  async cancel(id: string, userId: string, userRole: Role, userCountryId?: string) {
+    const order = await this.findOne(id, userId, userRole, userCountryId);
 
     if (order.status === OrderStatus.DELIVERED || order.status === OrderStatus.CANCELLED) {
       throw new BadRequestException('Order cannot be cancelled');
