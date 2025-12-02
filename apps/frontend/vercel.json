@@ -1,7 +1,7 @@
 {
-  "buildCommand": "cd ../.. && pnpm --filter @slooze/frontend build",
-  "outputDirectory": "apps/frontend/.next",
-  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
+  "buildCommand": "cd ../.. && corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile && pnpm --filter @slooze/frontend build",
+  "outputDirectory": ".next",
+  "installCommand": "cd ../.. && corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile",
   "framework": "nextjs",
   "rootDirectory": "apps/frontend"
 }
